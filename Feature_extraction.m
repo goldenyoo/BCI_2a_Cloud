@@ -2,7 +2,7 @@
 %    File_name: Calib.m
 %    Programmer: Seungjae Yoo                             
 %                                           
-%    Last Modified: 2020_03_30                           
+%    Last Modified: 2022_09_02                           
 %                                                            
  % ----------------------------------------------------------------------- %
 clear all
@@ -15,7 +15,6 @@ c1 = 0;
 c2 = 0;
 c3 = 0;
 c4 = 0;
-
 
  data_label = data_labels
     
