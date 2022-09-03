@@ -13,8 +13,11 @@ ms = [16,32,64];
 
 for data_label = data_labels
     for m = ms
-        FILENAME = strcat('/Users/goldenyoo/Library/Mobile Documents/com~apple~CloudDocs/BioCAS_prepare/BCIIV_2a_mat/A0',data_label,'T_2_mat');
-        %     FILENAME = strcat('D:\바탕화면\BCIIV_2a_mat\A0',data_label,'E_mat');
+
+
+        FILENAME = strcat('/Users/goldenyoo/Library/Mobile Documents/com~apple~CloudDocs/BioCAS_prepare/BCIIV_2a_mat/A0',data_label,'E_mat');
+        load(FILENAME);
+        FILENAME = strcat('/Users/goldenyoo/Library/Mobile Documents/com~apple~CloudDocs/BioCAS_prepare/BCIIV_2a_mat/true_labels/A0',data_label,'E.mat');
         load(FILENAME);
 
         Class_1 = [];
@@ -24,21 +27,20 @@ for data_label = data_labels
         reject = [];
 
         i=1;
+        event = 1;
         while i <=length(h.EVENT.TYP)
-            if h.EVENT.TYP(i)== 1023
-                reject = [reject h.EVENT.POS(i)];
-                i = i + 1;
-            elseif h.EVENT.TYP(i)== 769
-                Class_1 = [Class_1 h.EVENT.POS(i)];
-                i = i + 1;
-            elseif h.EVENT.TYP(i)== 770
-                Class_2 = [Class_2 h.EVENT.POS(i)];
-                i = i + 1;
-            elseif h.EVENT.TYP(i)== 771
-                Class_3 = [Class_3 h.EVENT.POS(i)];
-                i = i + 1;
-            elseif h.EVENT.TYP(i)== 772
-                Class_4 = [Class_4 h.EVENT.POS(i)];
+            if h.EVENT.TYP(i)== 783
+                if classlabel(event) == 1
+                    Class_1 = [Class_1 h.EVENT.POS(i)];
+                elseif classlabel(event) == 2
+                    Class_2 = [Class_2 h.EVENT.POS(i)];
+                elseif classlabel(event) == 3
+                    Class_3 = [Class_3 h.EVENT.POS(i)];
+                else
+                    Class_4 = [Class_4 h.EVENT.POS(i)];
+                end
+
+                event = event + 1;
                 i = i + 1;
             else
                 i = i + 1;
@@ -106,7 +108,7 @@ for data_label = data_labels
             Y4(i,1) = 4;
         end
 
-        save_file_name = strcat('/Users/goldenyoo/Library/Mobile Documents/com~apple~CloudDocs/BioCAS_prepare/BCIIV_2a_mat/myData/Calib_data_',data_label ,'_chop_',int2str(m),'.mat')
+        save_file_name = strcat('/Users/goldenyoo/Library/Mobile Documents/com~apple~CloudDocs/BioCAS_prepare/BCIIV_2a_mat/myData/Eval_data_',data_label ,'_chop_',int2str(m),'.mat')
         save(save_file_name,'K1','K2','A1','A2','Y1','Y2');
         clear group_1 group_2 group_3 group_4 K1 K2 K3 K4 A1 A2 A3 A4 Y1 Y2 Y3 Y4
     end
