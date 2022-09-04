@@ -61,24 +61,24 @@ for data_label = data_labels
             Class_4(cc4) = [];
         end
 
-        %     for j = length(Class_1):-1:1
-        %         Class_1 = [Class_1 Class_1(j)-5  Class_1(j)+5];
-        %     end
-        %
-        %     for j = length(Class_2):-1:1
-        %         Class_2 = [Class_2 Class_2(j)-5  Class_2(j)+5];
-        %     end
-        %
-        %     for j = length(Class_3):-1:1
-        %         Class_3 = [Class_3 Class_3(j)-5  Class_3(j)+5];
-        %     end
-        %
-        %     for j = length(Class_4):-1:1
-        %         Class_4 = [Class_4 Class_4(j)-5  Class_4(j)+5];
-        %     end
+        for j = length(Class_1):-1:1
+            Class_1 = [Class_1 Class_1(j)+5  Class_1(j)+10 Class_1(j)+15 Class_1(j)+20 Class_1(j)+25];
+        end
+
+        for j = length(Class_2):-1:1
+            Class_2 = [Class_2 Class_2(j)+5  Class_2(j)+10 Class_2(j)+15 Class_2(j)+20 Class_2(j)+25];
+        end
+
+        for j = length(Class_3):-1:1
+            Class_3 = [Class_3 Class_3(j)+5  Class_3(j)+10 Class_3(j)+15];
+        end
+
+        for j = length(Class_4):-1:1
+            Class_4 = [Class_4 Class_4(j)+5  Class_4(j)+10 Class_4(j)+15];
+        end
 
         cue_offset = 313; % 1.25sec * 250Hz
-        imagery_duration  = 3*250; % 3sec * 250Hz
+        imagery_duration  = floor(2.75*250); % 3sec * 250Hz
         rear_offset = cue_offset + imagery_duration;
 
 
@@ -107,8 +107,13 @@ for data_label = data_labels
             [K4(:,:,i), A4(:,:,i)] = my_SAX(squeeze(group_4(i,:,:)),m);
             Y4(i,1) = 4;
         end
+        
+        K1 = permute(K1,[2 1 3]);
+        K2 = permute(K2,[2 1 3]);
+        A1 = permute(A1,[2 1 3]);
+        A2 = permute(A2,[2 1 3]);
 
-        save_file_name = strcat('/Users/goldenyoo/Library/Mobile Documents/com~apple~CloudDocs/BioCAS_prepare/BCIIV_2a_mat/myData/Eval_data_',data_label ,'_chop_',int2str(m),'.mat')
+        save_file_name = strcat('/Users/goldenyoo/Library/Mobile Documents/com~apple~CloudDocs/BioCAS_prepare/BCIIV_2a_mat/myData/Aug/Eval_data_',data_label ,'_chop_',int2str(m),'.mat')
         save(save_file_name,'K1','K2','A1','A2','Y1','Y2');
         clear group_1 group_2 group_3 group_4 K1 K2 K3 K4 A1 A2 A3 A4 Y1 Y2 Y3 Y4
     end
