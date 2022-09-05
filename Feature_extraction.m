@@ -17,6 +17,8 @@ for data_label = data_labels
         %     FILENAME = strcat('D:\바탕화면\BCIIV_2a_mat\A0',data_label,'E_mat');
         load(FILENAME);
 
+        s(find(isnan(s))) = min(min(s));
+
         Class_1 = [];
         Class_2 = [];
         Class_3 = [];

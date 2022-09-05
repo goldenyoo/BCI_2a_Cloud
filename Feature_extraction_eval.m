@@ -20,6 +20,8 @@ for data_label = data_labels
         FILENAME = strcat('/Users/goldenyoo/Library/Mobile Documents/com~apple~CloudDocs/BioCAS_prepare/BCIIV_2a_mat/true_labels/A0',data_label,'E.mat');
         load(FILENAME);
 
+        s(find(isnan(s))) = min(min(s));
+
         Class_1 = [];
         Class_2 = [];
         Class_3 = [];
