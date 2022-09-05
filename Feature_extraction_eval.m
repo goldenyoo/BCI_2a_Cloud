@@ -86,36 +86,31 @@ for data_label = data_labels
 
         for i = 1:length(Class_1)
             group_1(i,:,:) = s(Class_1(i)+cue_offset:Class_1(i)+rear_offset,channel_selection);
-            [K1(:,:,i), A1(:,:,i)] = my_SAX(squeeze(group_1(i,:,:)),m);
+            X1(:,:,i) = my_normalization(squeeze(group_1(i,:,:)));
             Y1(i,1) = 1;
         end
 
         for i = 1:length(Class_2)
             group_2(i,:,:) = s(Class_2(i)+cue_offset:Class_2(i)+rear_offset,channel_selection);
-            [K2(:,:,i), A2(:,:,i)] = my_SAX(squeeze(group_2(i,:,:)),m);
+            X2(:,:,i) = my_normalization(squeeze(group_2(i,:,:)));
             Y2(i,1) = 2;
         end
 
         for i = 1:length(Class_3)
             group_3(i,:,:) = s(Class_3(i)+cue_offset:Class_3(i)+rear_offset,channel_selection);
-            [K3(:,:,i), A3(:,:,i)] = my_SAX(squeeze(group_3(i,:,:)),m);
+            X3(:,:,i) = my_normalization(squeeze(group_3(i,:,:)));
             Y3(i,1) = 3;
         end
 
         for i = 1:length(Class_4)
             group_4(i,:,:) = s(Class_4(i)+cue_offset:Class_4(i)+rear_offset,channel_selection);
-            [K4(:,:,i), A4(:,:,i)] = my_SAX(squeeze(group_4(i,:,:)),m);
+            X4(:,:,i) = my_normalization(squeeze(group_4(i,:,:)));
             Y4(i,1) = 4;
         end
-        
-        K1 = permute(K1,[2 1 3]);
-        K2 = permute(K2,[2 1 3]);
-        A1 = permute(A1,[2 1 3]);
-        A2 = permute(A2,[2 1 3]);
 
-        save_file_name = strcat('/Users/goldenyoo/Library/Mobile Documents/com~apple~CloudDocs/BioCAS_prepare/BCIIV_2a_mat/myData/Aug/Eval_data_',data_label ,'_chop_',int2str(m),'.mat')
-        save(save_file_name,'K1','K2','A1','A2','Y1','Y2');
-        clear group_1 group_2 group_3 group_4 K1 K2 K3 K4 A1 A2 A3 A4 Y1 Y2 Y3 Y4
+        save_file_name = strcat('/Users/goldenyoo/Library/Mobile Documents/com~apple~CloudDocs/BioCAS_prepare/BCIIV_2a_mat/myData/Raw/Eval_data_',data_label ,'_chop_',int2str(m),'.mat')
+        save(save_file_name,'X1','X2','Y1','Y2');
+        clear group_1 group_2 group_3 group_4 X1 X2 X3 X4 Y1 Y2 Y3 Y4
     end
 end
 %%
